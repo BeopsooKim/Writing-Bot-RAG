@@ -1,0 +1,9 @@
+interface:
+  display_name: "Writing Bot"
+  short_description: "Official master entry point for Korean/English Writing Bot skills."
+  default_prompt: "Use Writing Bot to route this writing task to the right specialized skill and produce the next prompt."
+
+policy:
+  allow_implicit_invocation: true
+
+

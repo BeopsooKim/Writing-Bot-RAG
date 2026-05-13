@@ -1,0 +1,16 @@
+{
+  "responses": [
+    {
+      "messages": [
+        {
+          "id": "sample-email-1",
+          "email_ts": "2026-05-11T03:43:30",
+          "subject": "ZhaoYang Dong - 새로운 관련 연구",
+          "body": "[Collaborative planning of multi-park electricity hydrogen integrated energy systems based on refined categorized demand response: a bi-level stochastic optimization framework](https://example.org/paper1.pdf)\n\nP Ren, Y Dong, H Zhang - Reliability Engineering & System Safety, 2026\n\nThis study tackles coordinated planning of multi-park electric hydrogen integrated energy systems.\n\n[Anomaly detection and cyber resilience improvement method for EV charging network against false data injection attacks](https://example.org/paper2)\n\nJ Xia, R Deng, M Wang - Sustainable Energy Technologies and Assessments, 2026\n\nThe rapid growth of EV charging infrastructure raises cybersecurity concerns."
+        }
+      ]
+    }
+  ]
+}
+
+
