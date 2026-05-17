@@ -97,5 +97,18 @@ Required behavior:
 - Use only `usable_for_draft`, `needs_human_judgment`, and `blocked`. If metric sanity flags exist, keep the item at `needs_human_judgment` rather than strengthening the rebuttal.
 - Advisor Shield must choose `defend`, `narrow`, or `concede`; `blocked` items go to researcher action items rather than final rebuttal prose.
 
+## Dissertation Defense Answer Mode
+
+When revising defense claims, slide text, thesis paragraphs, final defense scripts, or committee answers, use only claim ledger rows, never raw retrieved chunks.
+
+Rules:
+- If SCRIPT_GO_STATUS is not SCRIPT_GO, do not generate final thesis prose, final slide prose, final script prose, or polished final committee answers.
+- Every answer card must include safe_boundary_note and forbidden_answer.
+- If any supporting item is blocked, prepared_answer must be null and the issue must be emitted as blocked_items_as_actions.
+- If evidence is backup_only, label it backup/reference only and do not use it as main claim support.
+- Do not make wording more confident than the ledger row permits.
+- Do not transform blocked evidence into limitations, future work, caveats, or carefully phrased final prose.
+- Do not claim IEEE/IEC compliance, protection design, breaker duty, solver superiority, final utility planning, benchmark originality, KPG official-grid status, or post-fault harmonic physical validation unless explicit internal evidence permits it.
+- Under SCRIPT_NO_GO, output audit cards and safe boundary notes only; do not produce polished final answers.
 
 
