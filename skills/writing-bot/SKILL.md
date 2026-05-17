@@ -111,4 +111,62 @@ Rules:
 - Do not claim IEEE/IEC compliance, protection design, breaker duty, solver superiority, final utility planning, benchmark originality, KPG official-grid status, or post-fault harmonic physical validation unless explicit internal evidence permits it.
 - Under SCRIPT_NO_GO, output audit cards and safe boundary notes only; do not produce polished final answers.
 
+## Dissertation Defense Korean-English Output Contract
+
+For dissertation-defense outputs, produce both Korean and English versions unless the user explicitly asks for one language only.
+
+Default output structure:
+
+```text
+## Korean
+<한국어 버전>
+
+## English
+<English version>
+
+## Terminology / Claim-Boundary Notes
+- <용어 선택 또는 claim boundary 주의사항>
+```
+
+Rules:
+- The Korean section must appear first.
+- The Korean version must be native Korean technical writing for power-system research, not a literal translation of the English version.
+- The English version must preserve the same gate, claim boundary, evidence status, forbidden answers, and uncertainty as the Korean version.
+- Do not make Korean wording more confident than the claim ledger, slide audit, or committee answer card permits.
+- Do not soften `blocked` or `needs_human_judgment` in Korean.
+- Keep source identifiers, units, variables, case IDs, artifact IDs, file names, and hash values unchanged.
+- Keep English terms when a Korean translation would be nonstandard or misleading.
+- Use Korean term plus English abbreviation on first use when useful, e.g., 조류계산(PF), 고장 해석(fault analysis), 고조파 해석(harmonic analysis), 전압형 컨버터(VSC).
+- Under SCRIPT_NO_GO, bilingual output is limited to audit cards, safe boundary notes, claim ledger summaries, blocked item action lists, slide audit reports, committee answer card skeletons, signoff packets, and readiness review reports.
+- Under SCRIPT_NO_GO, do not produce Korean or English final thesis prose, final slide prose, final defense script, or polished committee answers.
+
+Korean power-system terminology:
+- Use 조류계산(PF) or 전력조류계산 for power flow analysis; do not use “전력 흐름” for the analysis method.
+- Use 운전점 or 운전 상태 for operating point/state.
+- Use 고장 해석 for fault analysis.
+- Use 고조파 해석 or 고조파 검토 according to scope.
+- Use 상태값 전달, 상태 연계, or handoff when needed for state handoff.
+- Use 후보 선별 or 계획 후보 선별 for screening.
+- Use 근거 경계 for evidence boundary and 주장 경계 for claim boundary.
+- Use 검증 only when evidence supports validation; otherwise use 확인, 점검, 추적, 검토, or 감사.
+- Do not translate compliance as 준수 입증 unless standard-specific internal evidence exists.
+
+Forbidden Korean wording unless explicit internal evidence permits it:
+- 완전한 검증
+- 전체 프레임워크의 검증
+- IEEE 519 준수 입증
+- IEC 준수 입증
+- 보호협조 검증
+- 차단기 정격 검증
+- 기존 도구보다 우수
+- 수치적으로 더 정확
+- 반복 횟수 감소
+- 계산 속도 향상
+- 최종 계통계획안
+- 공식 한국 계통 모델
+- 고장 후 고조파의 물리적 검증
+- KPG-193 공식 한국 계통
+- 13 out of 540
+- 전체 프레임워크의 보편적 검증
+- EMT 수준 검증
 

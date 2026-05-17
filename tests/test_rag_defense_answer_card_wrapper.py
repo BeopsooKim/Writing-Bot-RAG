@@ -14,6 +14,31 @@ SCRIPT = REPO_ROOT / "skills" / "writing-bot" / "scripts" / "rag_defense_answer_
 DEFENSE_ROOT = Path(os.environ.get("DEFENSE_RAG_ROOT", "/Users/beopsookim/Desktop/work/Dissertation_Works_active/Defense_RAG"))
 
 
+def bilingual_output_contract() -> dict:
+    return {
+        "version": "bilingual_defense_output_contract_v1",
+        "required": True,
+        "output_kind": "claim_ledger_row",
+        "default_order": ["ko", "en", "terminology_claim_boundary_notes"],
+        "korean_first": True,
+        "english_required": True,
+        "terminology_notes_required": True,
+        "same_gate_required": True,
+        "same_claim_boundary_required": True,
+        "same_evidence_status_required": True,
+        "same_forbidden_answers_required": True,
+        "same_uncertainty_required": True,
+        "korean_native_power_system_style_required": True,
+        "literal_translation_disallowed": True,
+        "korean_must_not_strengthen_english": True,
+        "final_outputs_allowed_by_script_status": False,
+        "allowed_under_script_no_go": ["audit_cards"],
+        "forbidden_under_script_no_go": ["final_thesis_prose"],
+        "recommended_korean_terms": {"power_flow": "조류계산(PF)"},
+        "forbidden_korean_wording": ["IEEE 519 준수 입증"],
+    }
+
+
 def run_wrapper(*args: str) -> dict:
     if not DEFENSE_ROOT.exists():
         pytest.skip("DEFENSE_RAG_ROOT is not available for wrapper integration test.")
@@ -64,6 +89,7 @@ def test_forbidden_answer_exists_under_script_no_go(tmp_path: Path) -> None:
                     "final_use_allowed": False,
                     "slide_use_allowed": False,
                     "committee_risk": "high",
+                    "bilingual_output": bilingual_output_contract(),
                 }
             ]
         ),
@@ -72,6 +98,7 @@ def test_forbidden_answer_exists_under_script_no_go(tmp_path: Path) -> None:
     result = run_wrapper("--question", "Give a polished committee answer.", "--ledger", str(ledger), "--prepared-answer", "unsafe")
     assert result["gate"] == "blocked"
     assert result["answer_card"]["forbidden_answer"]
+    assert result["answer_card"]["bilingual_output"]["korean_first"] is True
     assert result["prepared_answer"] is None
     assert result["final_prose_allowed"] is False
 
