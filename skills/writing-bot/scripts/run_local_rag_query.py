@@ -8,6 +8,16 @@ import sys
 from pathlib import Path
 
 
+REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT / "src"))
+
+from research_rag.defense_route_guard import (  # noqa: E402
+    RawDefenseQueryBlocked,
+    assert_not_raw_defense_query,
+)
+
+
 def find_python(root: Path) -> Path:
     candidates = [
         root / ".conda" / "python.exe",
@@ -130,6 +140,12 @@ def main() -> int:
     parser.add_argument("--deadline-s", type=float, default=50.0)
     args = parser.parse_args()
 
+    try:
+        assert_not_raw_defense_query(args.query, "skills/writing-bot/scripts/run_local_rag_query.py")
+    except RawDefenseQueryBlocked as exc:
+        print(json.dumps(exc.payload, indent=2, ensure_ascii=True))
+        return 0
+
     root = Path(args.root)
     python = find_python(root)
     env = os.environ.copy()
@@ -178,5 +194,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
 

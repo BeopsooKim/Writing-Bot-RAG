@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .config import RagConfig
 from .db import init_db
+from .defense_route_guard import RawDefenseQueryBlocked, assert_not_raw_defense_query
 from .downloader import safe_resolve_papers
 from .drive_ingest import ingest_drive_manifest
 from .embeddings import build_dense_index
@@ -84,6 +85,11 @@ def cmd_build_works(args: argparse.Namespace) -> None:
 
 
 def cmd_query(args: argparse.Namespace) -> None:
+    try:
+        assert_not_raw_defense_query(args.query, "research_rag.cli query")
+    except RawDefenseQueryBlocked as exc:
+        _print(exc.payload)
+        return
     cfg = _config(args)
     init_db(cfg.db_path)
     mode = "dense" if args.dense else args.mode
@@ -274,4 +280,3 @@ def main(argv: list[str] | None = None) -> None:
 
 if __name__ == "__main__":
     main()
-
