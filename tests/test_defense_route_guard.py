@@ -12,6 +12,8 @@ from research_rag.defense_route_guard import (
     build_raw_defense_query_block_message,
     is_defense_facing_query,
 )
+from research_rag.config import RagConfig
+from research_rag.retrieval import retrieve
 
 
 @pytest.mark.parametrize(
@@ -63,3 +65,8 @@ def test_cli_query_blocks_defense_before_retrieval() -> None:
     assert payload["final_prose_allowed"] is False
     assert payload["prepared_answer"] is None
     assert payload["results"] == []
+
+
+def test_retrieve_blocks_defense_before_search(tmp_path) -> None:
+    with pytest.raises(RawDefenseQueryBlocked):
+        retrieve(RagConfig.from_root(tmp_path), "PF -> Fault -> Harmonic physical validation", mode="bm25")

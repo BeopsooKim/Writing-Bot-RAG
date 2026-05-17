@@ -9,6 +9,7 @@ from typing import Any
 
 from .config import RagConfig
 from .db import connect
+from .defense_route_guard import assert_not_raw_defense_query
 from .embeddings import dense_search
 from .query import search
 
@@ -351,6 +352,7 @@ def retrieve(
     rerank_batch_size: int = 4,
     rerank_time_budget_s: float | None = None,
 ) -> list[dict[str, Any]]:
+    assert_not_raw_defense_query(query, "research_rag.retrieval.retrieve")
     if mode == "bm25":
         rows = _ranked(search(config, query, top_k=top_k), "bm25_rank")
         for row in rows:
@@ -407,4 +409,3 @@ def retrieve(
     else:
         rows = _apply_bot_labels(rows, rerank_status="disabled")
     return rows[:top_k]
-
