@@ -482,7 +482,7 @@ def improvement_claim(text: str | None) -> bool:
     value = clean_text(text).lower()
     return bool(
         re.search(
-            r"\b(improv|better|reduce|reduction|increase|decrease|lower|higher|faster|slower|less|more|outperform|superior)\b|개선|감소|증가|향상|우수",
+            r"\b(improv\w*|better|reduc\w*|increase|decrease|lower|higher|faster|slower|less|more|outperform\w*|superior|accur\w*|validat\w*|speed\w*|efficient)\b|개선|감소|증가|향상|우수",
             value,
         )
     )
@@ -925,4 +925,3 @@ def write_advisor_files(workspace: Path, advisor: dict[str, Any]) -> dict[str, s
     paths["final_rebuttal_letter"].write_text(advisor_markdown(advisor), encoding="utf-8")
     paths["revision_plan"].write_text(revision_plan_markdown(advisor), encoding="utf-8")
     return {key: str(path) for key, path in paths.items()}
-
